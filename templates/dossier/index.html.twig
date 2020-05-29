@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DossierController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table>
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Société</td>
+            <td>Intitulé de la formation</td>
+            <td>Lieu</td>
+            <td>Financeur</td>
+            <td>Type de formation</td>
+            <td>Code Direccte</td>
+            <td>Code Action</td>
+            <td>Niveau</td>
+            <td>Cat de formation</td>
+            <td>Bon de commande</td>
+            <td>Début formation</td>
+            <td>Fin formation</td>
+            <td>Nombre de candidat</td>
+            <td>Date de création</td>
+            <td>Heures totales</td>
+            <td>Heures en centre</td>
+            <td>Heures en entreprise</td>
+            <td>Journées totales</td>
+            <td>Journées en centre</td>
+            <td>Journées en entreprise</td>
+            <td>Notes</td>
+            <td>Compte</td>
+            <td>Lieu formation</td>
+            <td>Tarif contracté</td>
+            <td>Statut</td>
+            <td>Contact dossier</td>
+            <td>Donneur d'ordre</td>
+            <td>Version formation</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <a href={{ path('dossier.putdata') }}>putdatas</a>
+
+{% endblock %}

@@ -1,10 +1,44 @@
 FROM php:7.4.3-fpm
+LABEL maintainer="dev@chialab.io"
+
+# Download script to install PHP extensions and dependencies
+ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+
+RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
+      curl \
+      git \
+      zip unzip \
+    && install-php-extensions \
+      bcmath \
+      bz2 \
+      calendar \
+      exif \
+      gd \
+      intl \
+      ldap \
+      memcached \
+      mysqli \
+      opcache \
+      pdo_mysql \
+      pdo_pgsql \
+      pgsql \
+      redis \
+      soap \
+      xsl \
+      zip \
+      sockets
+# already installed:
+#      iconv \
+#      mbstring \
+
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends vim curl debconf subversion git apt-transport-https apt-utils \
     build-essential locales acl mailutils wget zip unzip \
     gnupg gnupg1 gnupg2
-RUN docker-php-ext-install pdo pdo_mysql
 COPY php.ini /etc/php/7.4.3/php.ini
 COPY php-fpm-pool.conf /etc/php/7.4.3/pool.d/www.conf
 
